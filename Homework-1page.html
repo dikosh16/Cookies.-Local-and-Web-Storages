@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework-1page</title>
+</head>
+<body>
+    <!-- Создайте страницу которая запрашивает имя пользователя, если пользователь вводит "Admin" либо "admin" он попадает на страницу,
+    которая оповещает его о том что " Пользоваетль Admin(не статическая строка, а данные что ввел пользователь) вошел в систему"
+    а рядом разместите кнопку "Выход" которая вернет пользователя к модальному окну ввода логина. Реализуйте код как для куки так и для localstorage. -->
+
+    <!-- Форма для введення імені користувача -->
+    <form id="loginForm">
+        <label for="username">Ім'я користувача:</label>
+        <input type="text" id="username" name="username" required>
+        <button type="submit">Вхід</button>
+    </form>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            // Скасуємо стандартну поведінку форми
+            event.preventDefault();
+            // Отримуємо введене ім'я користувача
+            var username = document.getElementById("username").value; 
+            if (username === "Admin" || username === "admin") {
+                // Зберігаємо ім'я користувача в localStorage
+                localStorage.setItem("username", username);
+                // Зберігаємо ім'я користувача в cookie
+                document.cookie = "username=" + username;
+                // Переходимо на сторінку Homework-2page.html
+                window.location.href = "/Homework-2page.html";
+            } else {
+                alert("Неправильне ім'я користувача!");
+            }
+        });
+    </script>
+</body>
+</html>

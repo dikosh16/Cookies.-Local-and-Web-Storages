@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+<body>
+    <script>
+        var usernameFromLocalStorage = localStorage.getItem("username");
+
+        var usernameFromCookie = document.cookie.split('; ')
+            .find(cookie => cookie.startsWith("username="))
+            .split('=')[1];
+
+        if (usernameFromLocalStorage || usernameFromCookie) {
+            // Якщо ім'я користувача є, показуємо привітання та кнопку "Вихід"
+            var username = usernameFromLocalStorage || usernameFromCookie;
+            document.write("Користувач " + username + " увійшов до системи.");
+            document.write("<br><br>");
+            document.write('<button onclick="logout()">Вихід</button>');
+        } else {
+            // Якщо немає імені користувача, переходимо на сторінку Homework-1page.html
+            window.location.href = "./Homework-1page.html";
+        }
+
+        function logout() {
+            // Видаляємо ім'я користувача з localStorage
+            localStorage.removeItem("username");
+            // Видаляємо cookie з ім'ям користувача
+            document.cookie = "username=; max-age=0; path=/;";
+            // Переходимо на сторінку Homework-1page.html
+            window.location.href = "./Homework-1page.html";
+        }
+    </script>
+</body>
+</html>
